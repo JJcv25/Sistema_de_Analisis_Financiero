@@ -1,17 +1,17 @@
-Sistema de análisis realizado con Python y Yahoo Finance
+**Sistema de análisis realizado con Python y Yahoo Finance**
 
-Descripción General
+**Descripción General**
 
 Este proyecto es una herramienta desarrollada en Python que permite obtener, procesar y visualizar datos financieros en tiempo real o histórico utilizando la API no oficial de Yahoo Finance.
 Su objetivo principal es facilitar el análisis básico de acciones mediante la extracción automática de precios y la generación de gráficos estadísticos.
 
-Objetivos del Proyecto
+**Objetivos del Proyecto**
 
 Centralizar la información financiera en un solo flujo de trabajo.
 Realizar cálculos estadísticos básicos sobre los precios.
 Generar gráficos que permitan interpretar la evolución y variabilidad de las acciones.
 
-Funciones Principales
+**Funciones Principales**
 
 1 - Extracción de Datos
 Obtiene información de acciones desde Yahoo Finance utilizando la librería yfinance.
@@ -34,7 +34,6 @@ Rendimiento acumulado
 
 3 - Generación de Gráficos
 Utiliza la librería como Matplotlib  para mostrar:
-
 Evolución del precio en el tiempo
 Distribución de rendimientos
 Comparación entre varias acciones
@@ -43,7 +42,6 @@ Estadísticas visuales básicas (boxplot, histogramas, etc.)
 
 4 - Modularidad
 El proyecto está diseñado para ser extensible:
-
 Se pueden agregar nuevos indicadores financieros.
 Se pueden incluir modelos predictivos (ARIMA, LSTM, regresiones).
 Es posible integrar alertas, dashboards o bases de datos.
@@ -54,7 +52,7 @@ Python/Pandas → para manipulación de datos
 Matplotlib → visualización gráfica
 Streamlit → creacion de interfaz web
 
-Conclusiones
+**Conclusiones**
 
 1 - Este proyecto permitió comprobar que, con Python y librerías como yfinance, es posible acceder fácilmente a datos reales del mercado y analizarlos sin necesidad de herramientas costosas o complejas.
 
