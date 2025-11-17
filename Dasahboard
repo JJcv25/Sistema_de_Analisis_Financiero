@@ -1,5 +1,4 @@
-
- # Importar librerias
+# Importar librerias
 
 import yfinance as yf
 import pandas as pd
@@ -51,7 +50,7 @@ else:
 
     data["Return_pct"]= data["Close"].pct_change()*100
 
-    #Muestre KPIS
+    # Muestre KPIS
 
     col1, col2, col3 = st.columns(3)
     col1.metric(f"Maximo (High)" ,f"{valorMaximo:.2f}")
@@ -82,7 +81,7 @@ else:
     fig1.tight_layout()
     st.pyplot(fig2)
 
-    #Estadisticas descriptivas
+    # Estadisticas descriptivas
 
     st.subheader("Estadísticas descriptivas")
     st.dataframe(
