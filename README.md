@@ -1,4 +1,4 @@
-# Sistema_de_An-lisis_Financiero
+# Sistema_de_Analisis_Financiero
 Sistema de análisis realizado con Python y Yahoo Finance
 
 
