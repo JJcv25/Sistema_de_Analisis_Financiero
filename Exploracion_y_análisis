@@ -1,1 +1,69 @@
 
+# Importar librerias
+import yfinance as yf 
+import pandas as pd 
+import matplotlib.pyplot as plt 
+
+# Analísis exploratorio con acciones de ecopetrol "Ecopetrol" 
+data = yf.Ticker("EC").history("6mo") 
+data 
+
+# Descripcion de tablas  
+data.describe() 
+
+# Valor maximo 
+valorMaximo = data["High"].max() 
+valorMaximo 
+
+# Valor minimo  
+valorMinimo = data["Low"].min() 
+valorMinimo
+
+# Valor promedio 
+valorPromedio = data["Close"].mean()
+round(valorPromedio,2)
+
+# Variacion diaria 
+data["Return_pct"] = data["Close"].pct_change()*100
+data[["Close", "Return_pct"]].tail()
+
+# Graficación exploratoria EC
+data["Close"].plot(figsize=(12,6), title= "Cotizacion tesla - ultimos 6 meses")
+plt.xlabel("Fecha")
+plt.ylabel("Precio de cierre (USD)")
+plt.grid()
+plt.tight_layout()
+plt.savefig("graficoCotizacion.png")
+plt.show()
+
+# Analísis exploratorio con acciones de Tesla "TSLA" 
+data = yf.Ticker("TSLA").history("6mo") 
+data 
+
+# Descripcion de tablas  
+data.describe() 
+
+# Valor maximo 
+valorMaximo = data["High"].max() 
+valorMaximo 
+
+# Valor minimo  
+valorMinimo = data["Low"].min() 
+valorMinimo 
+
+# Valor promedio 
+valorPromedio = data["Close"].mean()
+round(valorPromedio,2)
+
+# Variacion diaria 
+data["Return_pct"] = data["Close"].pct_change()*100
+data[["Close", "Return_pct"]].tail()
+
+# Graficación exploratoria TSLA
+data["Close"].plot(figsize=(12,6), title= "Cotizacion tesla - ultimos 6 meses")
+plt.xlabel("Fecha")
+plt.ylabel("Precio de cierre (USD)")
+plt.grid()
+plt.tight_layout()
+plt.savefig("graficoCotizacion.png")
+plt.show()
