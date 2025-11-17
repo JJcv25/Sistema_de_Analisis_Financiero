@@ -1,0 +1,90 @@
+
+ # Importar librerias
+
+import yfinance as yf
+import pandas as pd
+import matplotlib.pyplot as plt
+import streamlit as st
+
+# Configuracion Basica
+
+st.set_page_config(page_title="Dashboard ", layout= "wide")
+
+st.title("Dashboard de Analisis de Acciones")
+st.write("Basado en los datos de yahoo finance")
+
+
+# Barra lateral - controles
+st.sidebar.header("Parametros de consulta")
+
+ticker =st.sidebar.text_input("Simbolo de la accion", value = "EC")
+periodo =st.sidebar.selectbox(
+    "Periodo de analisis",
+    options = ["1mo", "3mo", "6mo", "1y", "2y", "3y"],
+    index = 2
+)
+
+intervalo = st.sidebar.selectbox(
+    "Intervalo de datos",
+    options = ["1d", "1wk", "1mo"],
+    index = 0
+)
+
+# Descargar los datos de Yahoo finance
+
+ticker_obj = yf.Ticker(ticker)
+data = ticker_obj.history(period = periodo, interval= intervalo)
+
+if data.empty:
+    st.error("No se cargaron datos, Revise la abreviacion de la accion!!")
+else:
+    st.subheader(f"Datos historicos de {ticker}")
+    st.dataframe(data.tail())
+    
+    # Calculos basicos
+
+    valorMaximo = data["High"].max()
+    valorMinimo = data["Low"].min()
+    valorPromedio = data["Close"].mean()
+
+    # Variacion diaria
+
+    data["Return_pct"]= data["Close"].pct_change()*100
+
+    #Muestre KPIS
+
+    col1, col2, col3 = st.columns(3)
+    col1.metric(f"Maximo (High)" ,f"{valorMaximo:.2f}")
+    col2.metric("Minimo (Low)", f"{valorMinimo:.2f}")
+    col3.metric("Promedio de cierre", f"{valorPromedio:.2f}")
+
+    # Grafico de precio de cierre
+
+    st.subheader("Evolucion de precio de cierre")
+    fig1, ax1 = plt.subplots(figsize = (10, 4 ))
+    ax1.plot(data.index, data ["Close"])
+    ax1.set_title(f"Cotizacion de {ticker}")
+    ax1.set_xlabel("Fecha")
+    ax1.set_ylabel("Precio de cierre")
+    ax1.grid(True)
+    fig1.tight_layout()
+    st.pyplot(fig1)
+
+    # Grafico de de retornos porcentuales
+
+    st.subheader("Retornos porcentuales diarios")
+    fig2, ax2 = plt.subplots(figsize = (10, 4 ))
+    ax2.bar(data.index, data ["Return_pct"])
+    ax2.set_title(f"Retornos diarios de {ticker}")
+    ax2.set_xlabel("Fecha")
+    ax2.set_ylabel("% Retorno diario")
+    ax2.axhline(0, color="black", linewidth =1)
+    fig1.tight_layout()
+    st.pyplot(fig2)
+
+    #Estadisticas descriptivas
+
+    st.subheader("Estadísticas descriptivas")
+    st.dataframe(
+    data[["Open", "High", "Low", "Close", "Volume", "Return_pct"]].describe()
+)
